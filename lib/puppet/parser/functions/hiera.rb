@@ -22,6 +22,7 @@ module Puppet::Parser::Functions
         raise(Puppet::ParseError, "Hiera config file #{configfile} not readable") unless File.exist?(configfile)
         raise(Puppet::ParseError, "You need rubygems to use Hiera") unless Puppet.features.rubygems?
 
+        require 'rubygems'
         require 'hiera'
         require 'hiera/scope'
 
