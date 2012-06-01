@@ -4,6 +4,8 @@ module Puppet::Parser::Functions
             args = args[0]
         end
 
+        raise(Puppet::ParseError, "Please supply a parameter to perform a Hiera lookup") if args.empty?
+
         key = args[0]
         default = args[1]
         override = args[2]
@@ -11,7 +13,6 @@ module Puppet::Parser::Functions
         configfile = File.join([File.dirname(Puppet.settings[:config]), "hiera.yaml"])
 
         raise(Puppet::ParseError, "Hiera config file #{configfile} not readable") unless File.exist?(configfile)
-        raise(Puppet::ParseError, "You need rubygems to use Hiera") unless Puppet.features.rubygems?
 
         require 'hiera'
         require 'hiera/scope'
